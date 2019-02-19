@@ -135,6 +135,43 @@ void SeqListRemove(SeqList* spl, SLDateType data)
 		SeqListErase(spl, pos);
 }
 
+void SeqListRemoveAll(SeqList* spl, SLDateType data)
+{
+	//删除全部遇到的data
+	assert(spl != NULL);
+	//int pos;
+	//while ((pos == SeqListFind(spl, data) != -1))
+	//	SeqListErase(spl,pos);//时间复杂度:O(n^2),空间复杂度:O(N)
+
+	//SLDateType* tmparr = (SLDateType*)malloc(sizeof(SLDateType)*spl->size);
+	//assert(tmparr != NULL);
+	//int j = 0;
+	//for (int i = 0; i < spl->size; ++i)
+	//{
+	//	if (spl->array[i] != data)
+	//	{
+	//		tmparr[j] = spl->array[i];
+	//		++j;
+	//	}
+	//}
+	//for (int k = 0; k < j; ++k)
+	//	spl->array[k] = tmparr[k];
+	//spl->size = j;
+	//free(tmparr);
+	//*tmparr = NULL;//时间复杂度:O(N),空间复杂度0(N)
+
+	int j = 0;
+	for (int i = 0; i < spl->size; ++i)
+	{
+		if (spl->array[i] != data)
+		{
+			spl->array[j] = spl->array[i];
+			++j;
+		}
+	}
+	spl->size = j; 
+}
+
 void SeqListModify(SeqList* spl, size_t pos,SLDateType*data)
 {
 	//修改pos所在的下标的数据
@@ -153,6 +190,38 @@ void SeqListPrint(SeqList* psl)
 	printf("\n");
 }
 
+void SeqListBubbleSort(SeqList* spl)
+{
+	//冒泡排序
+	assert(spl!=NULL);
+	for (int i = 0; i < spl->size; ++i)
+	{
+		for (int j = spl->size - 1; j > i; --i)
+			if (spl->array[j] < spl->array[j - 1])
+			{
+				SLDateType tmp = spl->array[j];
+				spl->array[j] = spl->array[j - 1];
+				spl->array[j - 1] = tmp;
+			}
+	}
+}
+
+int SeqListBinarySearch(SeqList* spl, SLDateType data)
+{
+	assert(spl != NULL);
+	int left = 0;
+	int right = spl->size - 1;
+	while (left <= spl->size)
+	{
+		int mid = (left + right) / 2;
+		if (spl->array[mid] < data)
+			left = mid + 1;
+		else if (spl->array[mid] > data)
+			right = mid - 1;
+		else
+			return mid;
+	}
+}
 
 int main()
 {
