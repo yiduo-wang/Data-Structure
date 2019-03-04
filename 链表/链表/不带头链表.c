@@ -270,6 +270,27 @@ void PrintSList(SListNode* pHead)
 	printf("NULL\n");
 }
 
+void ReverseList(SListNode** pHead)
+{
+	//反转一个单链表
+	assert(pHead != NULL);
+	if (*pHead == NULL)
+		return;
+	else
+	{
+		SListNode* pPre = NULL;
+		SListNode* pCur = *pHead;
+		SListNode* pNext = NULL;
+		while (pCur != NULL)
+		{
+			pNext = pCur->_pNext;
+			pCur->_pNext = pPre;
+			pPre = pCur;
+			pCur = pNext;
+		}
+	}
+}
+
 void TestList5()//搭配SListRemoveAll
 {
 	SListNode* pList = NULL;
@@ -281,6 +302,9 @@ void TestList5()//搭配SListRemoveAll
 	SListPushBack(&pList, 2);
 	SListPushBack(&pList, 6);
 	SListPushBack(&pList, 2);
+	PrintSList(pList);
+
+	ReverseList(&pList);
 	PrintSList(pList);
 
 	SListRemoveAll(&pList, 2);
