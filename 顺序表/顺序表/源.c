@@ -32,7 +32,7 @@ void CheckCapacity(SeqList* spl)
 {
 	//À©ÈÝ
 	assert(spl != NULL);
-	if (spl->size <= spl->capacity)
+	if (spl->size >= spl->capacity)
 		spl->array = (SLDateType*)realloc(spl->array, 50);
 }
 
