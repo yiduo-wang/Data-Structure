@@ -1,6 +1,6 @@
 //这些题目都已经在LeetCode上编译测试通过了,所以只有运行的代码,没有头文件以及测试用例
 
-struct  ListNode{
+struct  ListNod{
 	int val;
 	struct ListNode *next;
 };
