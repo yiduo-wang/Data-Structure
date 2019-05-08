@@ -24,4 +24,7 @@
 	  perorder(root, returnSize, arr);
 	  return arr;
   }
+
+  //2.计算一个二叉树有多少个节点
+
  
