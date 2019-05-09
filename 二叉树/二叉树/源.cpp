@@ -26,5 +26,18 @@
   }
 
   //2.计算一个二叉树有多少个节点
+  void levelOrderTraversal(vector<int> &store, TreeNode *root) {
+	  queue<TreeNode *> Q;
+	  Q.push(root);
+	  while (!Q.empty()) {
+		  TreeNode *curr_node = Q.front();
+		  if (curr_node) {
+			  store.push(curr_node->val);
+			  Q.push(curr_node->left);
+			  Q.push(curr_node->right);
+		  }
+	  }
+	  return;
+  }
 
  
