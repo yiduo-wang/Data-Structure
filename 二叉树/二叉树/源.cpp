@@ -91,4 +91,76 @@
 	  }
   }
 
- 
+#include<stdio.h>
+#include<iostream>
+#include<queue>
+#include<stdlib.h>
+  using namespace std;
+  struct node
+  {
+	  char v;
+	  int num;
+	  int depth;
+	  struct node*ls, *rs;
+  };
+
+
+  struct node*head;
+  struct node*build()
+  {
+	  char ch;
+	  cin >> ch;
+	  if (ch == '#') return NULL;
+	  struct node*p = (struct node*)malloc(sizeof(struct node));
+	  p->v = ch;
+	  p->ls = build();
+	  p->rs = build();
+	  return p;
+
+  };
+
+
+  int judge()
+  {
+	  if (!head) return 0; //如果树的根节点不存在，即树不存在，认为不是完全二叉树
+	  struct node*p;
+	  queue<struct node*>q;
+	  while (!q.empty()) q.pop();
+	  q.push(head);//根节点入队
+	  while (p = q.front())//队首元素不为NULL代表该节点存在，拓展这个节点的儿子节点，若为NULL，说明搜索到的节点为空节点了，那么就遍历队列里已有元素
+	  {
+		  q.push(p->ls);
+		  q.push(p->rs);
+		  q.pop();
+	  }
+	  while (!q.empty())
+	  {
+		  if (q.front()) return 0;
+		  q.pop();
+
+	  }
+	  return 1;
+
+  }
+  void first(struct node *p)
+  {
+	  if (!p) return;
+	  cout << "/节点的值：" << p->v << endl;
+	  first(p->ls);
+	  first(p->rs);
+  }
+
+  int main()
+  {
+
+
+
+	  head = build();
+
+	  if (judge())
+		  cout << "yes" << endl;
+	  else
+		  cout << "no" << endl;
+
+	  return 0;
+  }
